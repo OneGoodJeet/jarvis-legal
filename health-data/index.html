@@ -10,12 +10,12 @@
 
 <h2>The consumer health data we collect</h2>
 <ul>
-<li><strong>From Apple Health, only the types you allow:</strong> weight, steps, sleep, heart rate, heart rate variability, resting heart rate, active energy and workouts.</li>
+<li><strong>From Apple Health, only the types you allow:</strong> weight and body composition (body fat, lean mass, BMI), steps, distance, flights climbed, active energy, exercise and stand minutes, sleep and sleep stages, heart rate, heart rate variability, resting heart rate, walking heart rate, heart rate recovery, respiratory rate, blood oxygen, VO2 max, sleeping wrist temperature, blood pressure, blood glucose, mindful minutes, time in daylight, sound exposure levels, workouts and the sex recorded in Health. This includes readings that a watch, ring, scale, blood pressure cuff or glucose sensor writes to Apple Health through its own app.</li>
 <li><strong>From your iPhone's Motion &amp; Fitness data, if you allow it:</strong> daily active minutes and stairs climbed.</li>
 <li><strong>What you log:</strong> workouts and sets, food and nutrition (calories, protein and other nutrients), nutrition targets, habits and check-ins (which can relate to health, such as sleep or meditation), and goals.</li>
 <li><strong>What the app works out from that:</strong> scores and trends such as Readiness, Recovery, Strain, sleep need and personal records.</li>
 </ul>
-<p>We don't collect precise location, and we never use a geofence around any health care service.</p>
+<p>We don't collect precise location, and we never use a geofence around any health care service. Fast food near you uses your location once, only when you tap "Use my location", to search Apple Maps; it isn't saved or sent to us.</p>
 
 <h2>Where it comes from</h2>
 <p>From you: Apple Health and Motion &amp; Fitness on your iPhone, with the permissions you grant, and what you type into the app. We don't buy health data or get it from anyone else.</p>
@@ -32,6 +32,7 @@
 <ul>
 <li><strong>Supabase</strong> (with Amazon Web Services in the United States): stores your synced data (not your Apple Health readings) in your private account and runs sign-in.</li>
 <li><strong>Apple:</strong> Apple Health, Sign in with Apple and subscriptions run on Apple's systems.</li>
+<li><strong>Anthropic</strong> (only on iPhones without Apple Intelligence, and only if you agree to it separately; on iPhones with Apple Intelligence the food coach runs on your iPhone and sends nothing): when you ask the coach something, it receives your question, the recent conversation and a summary of what you logged in the app (food, calories and macros for the last two weeks, nutrition targets, goal, calorie floor and workouts logged in the app this week) to write the answer. Never your Apple Health readings. It keeps requests only for a limited time for safety monitoring and doesn't train models on them. The coach asks for this separate consent before anything is sent, and you can turn it off in Settings &rarr; Your data &rarr; Food coach.</li>
 </ul>
 <p>Food searches and barcode lookups go to Open Food Facts with only the words or barcode you entered, never any of your health data. We have no affiliates that receive consumer health data.</p>
 
