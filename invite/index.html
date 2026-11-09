@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You're invited to Tempest</title><link rel="stylesheet" href="../style.css">
+<meta name="robots" content="noindex">
+<style>
+.code{font:700 2.2rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;margin:.4em 0;user-select:all}
+.btn{display:inline-block;padding:14px 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;margin:8px 8px 0 0}
+.btn.alt{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.hidden{display:none}
+button.btn{font:inherit;font-weight:600;cursor:pointer}
+</style></head>
+<body><main>
+<nav><a href="../">Tempest</a><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></nav>
+<h1>A friend invited you to Tempest</h1>
+<p class="meta">Workouts, food and habits in one iPhone app.</p>
+<div id="has-code" class="hidden">
+  <p>Join with this code and your first month of Pro is free:</p>
+  <p class="code" id="code"></p>
+  <p><button class="btn alt" id="copy" type="button">Copy code</button></p>
+  <p><a class="btn" id="open" href="#">Open in Tempest</a><a class="btn alt" id="store" href="#">Get Tempest on the App Store</a></p>
+  <p>New to Tempest? Copy the code, install the app, then tap <strong>Have an invite code?</strong> when you create your account and paste it. You can also add it later in Settings, Invite friends, during your first 14 days.</p>
+</div>
+<div id="friend-only" class="hidden">
+  <p>Your friend wants to do step challenges with you. Install Tempest, then open this link again, or type this code in Friends &amp; challenges:</p>
+  <p class="code" id="fcode"></p>
+  <p><a class="btn" id="fopen" href="#">Open in Tempest</a><a class="btn alt" id="fstore" href="#">Get Tempest on the App Store</a></p>
+</div>
+<p id="no-code" class="hidden">This invite link is missing its code. Ask your friend to send it again.</p>
+<footer>Your friend gets a free month too once you start paying for Pro. Free months are App Store offer codes with no cash value and a redeem-by date. See the <a href="../terms/">Terms of Use</a>.</footer>
+</main>
+<script>
+// The one config for links: the app's URL scheme and its App Store page (set the id once known).
+var SCHEME = "onegoodjeet";
+var APP_STORE_URL = "https://apps.apple.com/us/search?term=Tempest%20Health%20%26%20Habits";
+(function () {
+  var q = new URLSearchParams(location.search);
+  var code = (q.get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (!/^[A-HJKMNP-Z2-9]{7}$/.test(code)) code = "";
+  // The sender's Friends & challenges code (audit round 3, U-01): 8 symbols, no 0/O/1/I.
+  var friend = (q.get("f") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (!/^[A-HJ-NP-Z2-9]{8}$/.test(friend)) friend = "";
+  if (!code && !friend) {
+    document.getElementById("no-code").classList.remove("hidden");
+    return;
+  }
+  if (code) {
+    document.getElementById("code").textContent = code.slice(0, 3) + " " + code.slice(3);
+    document.getElementById("open").href = SCHEME + "://invite/" + code + (friend ? "?f=" + friend : "");
+    document.getElementById("store").href = APP_STORE_URL;
+    document.getElementById("has-code").classList.remove("hidden");
+    document.getElementById("copy").addEventListener("click", function () {
+      var btn = this;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(function () { btn.textContent = "Copied"; });
+      }
+    });
+  } else {
+    document.getElementById("fcode").textContent = friend;
+    document.getElementById("fopen").href = SCHEME + "://friend/" + friend;
+    document.getElementById("fstore").href = APP_STORE_URL;
+    document.getElementById("friend-only").classList.remove("hidden");
+  }
+})();
+</script>
+</body></html>
