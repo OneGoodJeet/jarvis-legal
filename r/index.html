@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A recipe on Tempest</title><link rel="stylesheet" href="../style.css">
+<meta name="robots" content="noindex">
+<style>
+.btn{display:inline-block;padding:14px 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;margin:8px 8px 0 0}
+.btn.alt{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.hidden{display:none}
+</style></head>
+<body><main>
+<nav><a href="../">Tempest</a><a href="../privacy/">Privacy Policy</a><a href="../terms/">Terms of Use</a></nav>
+<h1>Someone shared a recipe with you</h1>
+<p class="meta">Workouts, food and habits in one iPhone app.</p>
+<div id="has-slug" class="hidden">
+  <p>Open it in Tempest to see the recipe.</p>
+  <p><a class="btn" id="open" href="#">Open in Tempest</a><a class="btn alt" id="store" href="#">Get Tempest on the App Store</a></p>
+  <p>New to Tempest? Install the app, then open this link again.</p>
+</div>
+<p id="no-slug" class="hidden">This recipe link is incomplete. Ask for it again.</p>
+</main>
+<script>
+// The one config for links: the app's URL scheme and its App Store page (the App Store ID is 6831725455).
+var SCHEME = "onegoodjeet";
+var APP_STORE_URL = "https://apps.apple.com/us/app/id6831725455";
+(function () {
+  var q = new URLSearchParams(location.search);
+  var slug = (q.get("s") || "").toLowerCase();
+  if (!/^[a-hjkmnp-z2-9]{10}$/.test(slug)) {
+    document.getElementById("no-slug").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("open").href = SCHEME + "://r/" + slug;
+  document.getElementById("store").href = APP_STORE_URL;
+  document.getElementById("has-slug").classList.remove("hidden");
+})();
+</script>
+</body></html>
